@@ -1,25 +1,19 @@
-import React, { useEffect, useState } from "react";
+import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/react";
 import Markdown from "markdown-to-jsx";
-import Translator from "./translator";
-import Prompt from "./prompt";
-import { Menu, MenuButton, MenuItems, MenuItem } from "@headlessui/react";
-import Loader from "./loader";
+import { useCallback, useEffect, useState } from "react";
 import Clipboard from "./clipboard";
+import Loader from "./loader";
+import Prompt from "./prompt";
+import Translator from "./translator";
 
 const Article = ({ input }: { input: string }) => {
   const [newText, setNewText] = useState<null | string>(null);
 
-  useEffect(() => {
-    if (input && input.length > 0) {
-      write();
-    }
-  }, [input]);
-
-  const write = async () => {
+  const write = useCallback(async () => {
     const writer = await window.ai.writer.create({
       tone: "casual",
       sharedContext:
-        "This article is for publishing on a news media website. This must have a heading, subheading, image link and word cound will be minimum of 200 words.",
+        "This article is for publishing on a news media website. This must have a heading, subheading, image link and word count will be minimum of 200 words.",
     });
 
     const stream = writer.writeStreaming(input, {
@@ -32,7 +26,13 @@ const Article = ({ input }: { input: string }) => {
       setNewText(fullResponse);
     }
     writer.destroy();
-  };
+  }, [input]);
+
+  useEffect(() => {
+    if (input && input.length > 0) {
+      void write();
+    }
+  }, [input, write]);
 
   const reWrite = async (tone: string) => {
     const rewriter = await window.ai.rewriter.create({

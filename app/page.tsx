@@ -1,10 +1,10 @@
 "use client";
 import { Inter, Poppins } from "next/font/google";
+import Image from "next/image";
 import { useState } from "react";
-import Summarizer from "./components/summarizer";
 import Article from "./components/article";
 import Prompt from "./components/prompt";
-import Image from "next/image";
+import Summarizer from "./components/summarizer";
 
 const inter = Inter({ subsets: ["latin"] });
 const poppins = Poppins({
@@ -98,7 +98,7 @@ export default function Home() {
                   setInput(e.target.value as string);
                 }}
                 id="url"
-                className="block w-full rounded-bl-lg rounded-br-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
+                className="block w-full rounded-bl-lg rounded-br-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 shadow-lg focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
                 placeholder="Put Your News Here"
                 required
               />

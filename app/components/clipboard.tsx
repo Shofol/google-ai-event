@@ -1,5 +1,4 @@
-import React from "react";
-import { Bounce, toast } from "react-toastify";
+import { toast } from "react-toastify";
 
 const Clipboard = ({ input }: { input: string }) => {
   return (

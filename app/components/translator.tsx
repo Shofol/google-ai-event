@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { useState } from "react";
 
 const Translator = ({
   input,
@@ -7,6 +8,7 @@ const Translator = ({
   input: string;
   output: (translatedText: string) => void;
 }) => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [translatedText, setTranslatedText] = useState("");
 
   const translateText = async () => {
@@ -28,7 +30,7 @@ const Translator = ({
       } else {
         // The translator can be used after the model download.
         translator = await window.translation.createTranslator(languagePair);
-        translator.addEventListener("downloadprogress", (e) => {
+        translator.addEventListener("downloadprogress", (e: any) => {
           console.log(e.loaded, e.total);
         });
         await translator.ready;

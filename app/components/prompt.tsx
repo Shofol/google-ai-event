@@ -1,8 +1,8 @@
 import Markdown from "markdown-to-jsx";
-import React, { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
+import Clipboard from "./clipboard";
 import Loader from "./loader";
 import Translator from "./translator";
-import Clipboard from "./clipboard";
 
 const Prompt = ({
   input,
@@ -15,14 +15,9 @@ const Prompt = ({
 }) => {
   const [resultText, setResultText] = useState<null | string>(null);
 
-  useEffect(() => {
-    if (input && input.length > 0) {
-      execute();
-    }
-  }, []);
-
-  const execute = async () => {
-    const { available, defaultTemperature, defaultTopK, maxTopK } =
+  const execute = useCallback(async () => {
+    const { available } =
+      // defaultTemperature, defaultTopK, maxTopK
       await window.ai.languageModel.capabilities();
 
     if (available !== "no") {
@@ -34,7 +29,14 @@ const Prompt = ({
         setResultText(chunk);
       }
     }
-  };
+  }, [input, prompt]);
+
+  useEffect(() => {
+    if (input && input.length > 0) {
+      execute();
+    }
+  }, [input, execute]);
+
   return (
     <>
       {!resultText && <Loader />}
@@ -47,7 +49,7 @@ const Prompt = ({
                 <Translator
                   input={resultText}
                   output={(text) => {
-                    setResultText(resultText);
+                    setResultText(text);
                   }}
                 />
                 <Clipboard input={resultText} />
