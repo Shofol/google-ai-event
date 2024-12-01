@@ -1,3 +1,6 @@
+
+![NewsBreak Website Screenshot](public/social/NewsBreak.png?raw=true "NewsBreak")
+
 # NewsBreak (Smarter news, your way)
 
 Imagine an AI assistant tailored for **journalists, writers, social activists, and engaged citizens** who navigate a flood of news daily. With so many events happening simultaneously, wouldn’t it be incredible to have **an assistant that can quickly summarize or explain the news? Think about the time and energy saved—enabling these individuals to focus on what truly matters: insights and action.**
