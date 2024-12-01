@@ -1,7 +1,5 @@
-# NEWSAI
-## Smarter news, your way
+# NewsBreak (Smarter news, your way)
 
-## Story
 Imagine an AI assistant tailored for **journalists, writers, social activists, and engaged citizens** who navigate a flood of news daily. With so many events happening simultaneously, wouldn’t it be incredible to have **an assistant that can quickly summarize or explain the news? Think about the time and energy saved—enabling these individuals to focus on what truly matters: insights and action.**
 
 Now, take it a step further. **These professionals often need to create impactful content—whether it's a blog article, a social post, an editorial, a campaign strategy, or even a poll to engage their audience or complete a work assignment. A social activist might spot breaking news worth rallying a campaign around.** Imagine having an AI assistant that not only understands the context but helps craft these outputs seamlessly. 
@@ -26,23 +24,18 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 
 ## Getting Started
 
-Important - Please follow the instruction here to enable the Built In APIs in your browser- https://docs.google.com/document/d/18otm-D9xhn_XyObbQrc1v7SI-7lBX3ynZkjEpiS1V04/edit?tab=t.0
+1. **Please follow the instruction here to enable the Built In APIs in your browser- https://docs.google.com/document/d/18otm-D9xhn_XyObbQrc1v7SI-7lBX3ynZkjEpiS1V04/edit?tab=t.0**
 
-Then, install the dependencies:
+2. Then, install the dependencies:
 
 ```bash
 npm install --force
 ```
 
-Run the development server-
+3. Run the development server-
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
