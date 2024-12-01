@@ -1,6 +1,10 @@
 import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/react";
 import React, { useEffect, useState } from "react";
 import Translator from "./translator";
+import Markdown from "markdown-to-jsx";
+import Image from "next/image";
+import Loader from "./loader";
+import Clipboard from "./clipboard";
 
 const Summarizer = ({ input }: { input: string }) => {
   const [summarizedText, setSummarizedText] = useState("");
@@ -65,9 +69,9 @@ const Summarizer = ({ input }: { input: string }) => {
   };
 
   return (
-    <div className="mt-5 rounded-lg bg-gray-800 px-5 py-5 text-sm text-gray-200 shadow-lg">
+    <>
       <div className="flex items-center justify-between">
-        <p className="font-bold">Summarized News</p>
+        {!summarizedText && <Loader />}
         {summarizedText && (
           <div className="flex gap-2">
             <Translator
@@ -76,6 +80,7 @@ const Summarizer = ({ input }: { input: string }) => {
                 setSummarizedText(text);
               }}
             />
+            <Clipboard input={summarizedText} />
             <Menu>
               <MenuButton className="inline-flex items-center gap-2 rounded-md bg-gray-600 px-3 py-1.5 text-xs font-semibold text-white focus:outline-none data-[hover]:bg-gray-700 data-[open]:bg-gray-700 data-[focus]:outline-1 data-[focus]:outline-white">
                 Length
@@ -201,8 +206,10 @@ const Summarizer = ({ input }: { input: string }) => {
           </div>
         )}
       </div>
-      <p className="mt-5 text-sm">{summarizedText}</p>
-    </div>
+      <div className="my-5">
+        <Markdown>{summarizedText}</Markdown>
+      </div>
+    </>
   );
 };
 
