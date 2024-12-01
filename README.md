@@ -26,11 +26,15 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 
 ## Getting Started
 
-## Important: Please follow the instruction here to enable the Built In APIs in your browser- 
-https://docs.google.com/document/d/18otm-D9xhn_XyObbQrc1v7SI-7lBX3ynZkjEpiS1V04/edit?tab=t.0
+Important - Please follow the instruction here to enable the Built In APIs in your browser- https://docs.google.com/document/d/18otm-D9xhn_XyObbQrc1v7SI-7lBX3ynZkjEpiS1V04/edit?tab=t.0
 
-First, run the development server:
+Then, install the dependencies:
 
+```bash
+npm install --force
+```
+
+Run the development server-
 ```bash
 npm run dev
 # or
