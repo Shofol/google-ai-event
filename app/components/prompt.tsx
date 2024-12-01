@@ -28,6 +28,7 @@ const Prompt = ({
       for await (const chunk of stream) {
         setResultText(chunk);
       }
+      session.destroy();
     }
   }, [input, prompt]);
 
@@ -35,6 +36,7 @@ const Prompt = ({
     if (input && input.length > 0) {
       execute();
     }
+    return () => {};
   }, [input, execute]);
 
   return (
