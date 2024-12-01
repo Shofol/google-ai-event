@@ -1,6 +1,33 @@
+# NEWSAI
+## Smarter news, your way
+
+## Story
+Imagine an AI assistant tailored for **journalists, writers, social activists, and engaged citizens** who navigate a flood of news daily. With so many events happening simultaneously, wouldn’t it be incredible to have **an assistant that can quickly summarize or explain the news? Think about the time and energy saved—enabling these individuals to focus on what truly matters: insights and action.**
+
+Now, take it a step further. **These professionals often need to create impactful content—whether it's a blog article, a social post, an editorial, a campaign strategy, or even a poll to engage their audience or complete a work assignment. A social activist might spot breaking news worth rallying a campaign around.** Imagine having an AI assistant that not only understands the context but helps craft these outputs seamlessly. 
+
+And, from this need I got the idea to build **NewsBreak**. An AI assistant like this wouldn’t just save time; it would empower users to amplify their voices, streamline their efforts, and bring their creative visions to life. 
+
+## What it does
+If you feed a news article as plain text to this AI assistant, it will offer you multiple ways to get help with. Right now, You will get eight tools to- 
+
+1. Summarize the news into concise points (Summry can be of different type like- points, headline, tl;dr, etc.)
+2. Write a blog article with SEO information required for that post
+3. Get the explanation of the news with background context
+4. Get suggestion social media post ideas
+5. Draft editorials on that news topic
+6. Design a campaign based on the news matter
+7. Create a poll on the news
+8. Receive feedback on your writing
+
+## Testing Method
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started
+
+## Important: Please follow the instruction here to enable the Built In APIs in your browser- 
+https://docs.google.com/document/d/18otm-D9xhn_XyObbQrc1v7SI-7lBX3ynZkjEpiS1V04/edit?tab=t.0
 
 First, run the development server:
 
@@ -16,21 +43,3 @@ bun dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
