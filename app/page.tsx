@@ -123,7 +123,7 @@ export default function Home() {
             </div>
           )}
         </main>
-        <footer className="fixed bottom-10 flex min-w-[80vw] items-center justify-between">
+        <footer className="mt-20 flex min-w-[80vw] items-center justify-between">
           <div>
             Built by{" "}
             <Link
@@ -150,10 +150,10 @@ export default function Home() {
               rel="noopener norefferer"
             >
               <Image
-                src="/social/linkedIn.svg"
+                src="/social/linkedin.svg"
                 width={22}
                 height={22}
-                alt="x logo"
+                alt="linkedin logo"
               />
             </Link>
           </div>
