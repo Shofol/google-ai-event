@@ -89,7 +89,7 @@ const Summarizer = ({ input }: { input: string }) => {
       <div className="flex items-center justify-between">
         {!summarizedText && <Loader />}
         {summarizedText && (
-          <div className="flex gap-2">
+          <div className="flex w-full justify-end gap-2">
             <Translator
               input={summarizedText}
               output={(text) => {

@@ -38,6 +38,8 @@ const Article = ({ input }: { input: string }) => {
   }, [input, write]);
 
   const reWrite = async (tone: string) => {
+    setNewText(null);
+    setTranslatedText(null);
     const rewriter = await window.ai.rewriter.create({
       tone: tone,
       sharedContext:
@@ -49,6 +51,7 @@ const Article = ({ input }: { input: string }) => {
     });
 
     let fullResponse = "";
+
     for await (const chunk of stream) {
       fullResponse = chunk.trim();
       setNewText(fullResponse);
@@ -61,63 +64,64 @@ const Article = ({ input }: { input: string }) => {
       {!newText && <Loader />}
       {newText && (
         <>
-          <Menu>
-            <MenuButton className="inline-flex items-center gap-2 rounded-md bg-gray-600 px-3 py-1.5 text-xs font-semibold text-white focus:outline-none data-[hover]:bg-gray-700 data-[open]:bg-gray-700 data-[focus]:outline-1 data-[focus]:outline-white">
-              Rewrite
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth={1.5}
-                stroke="currentColor"
-                className="size-4"
+          <div className="flex justify-end">
+            <Menu>
+              <MenuButton className="inline-flex items-center gap-2 rounded-md bg-gray-600 px-3 py-1.5 text-xs font-semibold text-white focus:outline-none data-[hover]:bg-gray-700 data-[open]:bg-gray-700 data-[focus]:outline-1 data-[focus]:outline-white">
+                Rewrite
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth={1.5}
+                  stroke="currentColor"
+                  className="size-4"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="m19.5 8.25-7.5 7.5-7.5-7.5"
+                  />
+                </svg>
+              </MenuButton>
+
+              <MenuItems
+                transition
+                anchor="bottom end"
+                className="w-52 origin-top-right rounded-xl border border-white/5 bg-gray-800 p-1 text-xs text-white transition duration-100 ease-out [--anchor-gap:var(--spacing-1)] focus:outline-none data-[closed]:scale-95 data-[closed]:opacity-0"
               >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="m19.5 8.25-7.5 7.5-7.5-7.5"
-                />
-              </svg>
-            </MenuButton>
-
-            <MenuItems
-              transition
-              anchor="bottom end"
-              className="w-52 origin-top-right rounded-xl border border-white/5 bg-gray-800 p-1 text-xs text-white transition duration-100 ease-out [--anchor-gap:var(--spacing-1)] focus:outline-none data-[closed]:scale-95 data-[closed]:opacity-0"
-            >
-              <MenuItem>
-                <button
-                  className="group flex w-full items-center gap-2 rounded-lg px-3 py-1.5"
-                  onClick={() => {
-                    reWrite("as-is");
-                  }}
-                >
-                  As is
-                </button>
-              </MenuItem>
-              <MenuItem>
-                <button
-                  className="group flex w-full items-center gap-2 rounded-lg px-3 py-1.5"
-                  onClick={() => {
-                    reWrite("more-casual");
-                  }}
-                >
-                  Casual
-                </button>
-              </MenuItem>
-              <MenuItem>
-                <button
-                  className="group flex w-full items-center gap-2 rounded-lg px-3 py-1.5"
-                  onClick={() => {
-                    reWrite("more-formal");
-                  }}
-                >
-                  Formal
-                </button>
-              </MenuItem>
-            </MenuItems>
-          </Menu>
-
+                <MenuItem>
+                  <button
+                    className="group flex w-full items-center gap-2 rounded-lg px-3 py-1.5"
+                    onClick={() => {
+                      reWrite("as-is");
+                    }}
+                  >
+                    As is
+                  </button>
+                </MenuItem>
+                <MenuItem>
+                  <button
+                    className="group flex w-full items-center gap-2 rounded-lg px-3 py-1.5"
+                    onClick={() => {
+                      reWrite("more-casual");
+                    }}
+                  >
+                    Casual
+                  </button>
+                </MenuItem>
+                <MenuItem>
+                  <button
+                    className="group flex w-full items-center gap-2 rounded-lg px-3 py-1.5"
+                    onClick={() => {
+                      reWrite("more-formal");
+                    }}
+                  >
+                    Formal
+                  </button>
+                </MenuItem>
+              </MenuItems>
+            </Menu>
+          </div>
           <h2 className="fotn-bold my-5 bg-purple-500 px-4 py-1 text-xl font-bold">
             Blog Article
           </h2>
