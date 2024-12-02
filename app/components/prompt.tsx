@@ -14,6 +14,7 @@ const Prompt = ({
   showMenu?: boolean;
 }) => {
   const [resultText, setResultText] = useState<null | string>(null);
+  const [translatedText, setTranslatedText] = useState<null | string>(null);
 
   const execute = useCallback(async () => {
     const { available } =
@@ -34,6 +35,8 @@ const Prompt = ({
 
   useEffect(() => {
     if (input && input.length > 0) {
+      setResultText(null);
+      setTranslatedText(null);
       execute();
     }
     return () => {};
@@ -51,15 +54,19 @@ const Prompt = ({
                 <Translator
                   input={resultText}
                   output={(text) => {
-                    setResultText(text);
+                    setTranslatedText(text);
                   }}
                 />
-                <Clipboard input={resultText} />
+                <Clipboard
+                  input={translatedText ? translatedText : resultText}
+                />
               </div>
             )}
           </div>
           <div className="my-5 h-px bg-gray-400" />
-          <Markdown className="leading-loose">{resultText}</Markdown>
+          <Markdown className="leading-loose">
+            {translatedText ? translatedText : resultText ? resultText : ""}
+          </Markdown>
         </>
       )}
     </>

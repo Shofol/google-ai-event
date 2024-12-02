@@ -8,6 +8,7 @@ import Translator from "./translator";
 
 const Article = ({ input }: { input: string }) => {
   const [newText, setNewText] = useState<null | string>(null);
+  const [translatedText, setTranslatedText] = useState<null | string>(null);
 
   const write = useCallback(async () => {
     const writer = await window.ai.writer.create({
@@ -30,6 +31,8 @@ const Article = ({ input }: { input: string }) => {
 
   useEffect(() => {
     if (input && input.length > 0) {
+      setNewText(null);
+      setTranslatedText(null);
       void write();
     }
   }, [input, write]);
@@ -123,13 +126,15 @@ const Article = ({ input }: { input: string }) => {
             <Translator
               input={newText}
               output={(text) => {
-                setNewText(text);
+                setTranslatedText(text);
               }}
             />
-            <Clipboard input={newText} />
+            <Clipboard input={translatedText ? translatedText : newText} />
           </div>
 
-          <Markdown>{newText}</Markdown>
+          <Markdown>
+            {translatedText ? translatedText : newText ? newText : ""}
+          </Markdown>
 
           <h2 className="fotn-bold my-5 bg-purple-500 px-4 py-1 text-xl font-bold">
             SEO Information

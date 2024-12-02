@@ -5,9 +5,12 @@ import { useCallback, useEffect, useState } from "react";
 import Clipboard from "./clipboard";
 import Loader from "./loader";
 import Translator from "./translator";
+import { toast } from "react-toastify";
 
 const Summarizer = ({ input }: { input: string }) => {
-  const [summarizedText, setSummarizedText] = useState("");
+  const [summarizedText, setSummarizedText] = useState<null | string>(null);
+  const [translatedText, setTranslatedText] = useState<null | string>(null);
+
   const [summaryType, setSummaryType] = useState<string | undefined>(undefined);
   const [summaryLength, setSummaryLength] = useState<string | undefined>(
     undefined,
@@ -29,26 +32,6 @@ const Summarizer = ({ input }: { input: string }) => {
   );
 
   const summarizeNews = useCallback(async () => {
-    // const canSummarize = await window.ai.summarizer.capabilities();
-    // let summarizer;
-    // if (canSummarize && canSummarize.available !== "no") {
-    //   if (canSummarize.available === "readily") {
-    //     // The summarizer can immediately be used.
-    //     summarizer = await window.ai.summarizer.create();
-    //     await summarize(summarizer);
-    //   } else {
-    //     // The summarizer can be used after the model download.
-    //     summarizer = await window.ai.summarizer.create();
-    //     summarizer.addEventListener("downloadprogress", (e: any) => {
-    //       console.log(e.loaded, e.total);
-    //     });
-    //     await summarizer.ready;
-    //   }
-    // } else {
-    //   alert("The summaraizer isn't supported on your browser");
-    //   // The summarizer can't be used at all.
-    // }
-
     try {
       const canSummarize = await window.ai.summarizer.capabilities();
       if (canSummarize && canSummarize.available !== "no") {
@@ -57,10 +40,14 @@ const Summarizer = ({ input }: { input: string }) => {
         if (canSummarize.available === "readily") {
           await summarize(summarizer);
         } else {
-          summarizer.addEventListener("downloadprogress", (e: any) => {
-            console.log(`Downloading model: ${e.loaded} of ${e.total}`);
-          });
+          const id = toast.loading("Downloading Model. Please wait...");
           await summarizer.ready;
+          toast.update(id, {
+            render: "Model Downloaded Successfully",
+            type: "success",
+            isLoading: false,
+          });
+          toast.dismiss(id);
           await summarize(summarizer);
         }
       } else {
@@ -73,6 +60,8 @@ const Summarizer = ({ input }: { input: string }) => {
 
   useEffect(() => {
     if (input && input.length > 0) {
+      setSummarizedText(null);
+      setTranslatedText(null);
       summarizeNews();
     }
   }, [input, summarizeNews]);
@@ -80,7 +69,6 @@ const Summarizer = ({ input }: { input: string }) => {
   const createNewSummarizer = async (
     type = "key-points",
     length = "medium",
-    // format = "plain-text",
   ) => {
     const summarizer = await window.ai.summarizer.create({ type, length });
     await summarize(summarizer);
@@ -105,10 +93,12 @@ const Summarizer = ({ input }: { input: string }) => {
             <Translator
               input={summarizedText}
               output={(text) => {
-                setSummarizedText(text);
+                setTranslatedText(text);
               }}
             />
-            <Clipboard input={summarizedText} />
+            <Clipboard
+              input={translatedText ? translatedText : summarizedText}
+            />
             <Menu>
               <MenuButton className="inline-flex items-center gap-2 rounded-md bg-gray-600 px-3 py-1.5 text-xs font-semibold text-white focus:outline-none data-[hover]:bg-gray-700 data-[open]:bg-gray-700 data-[focus]:outline-1 data-[focus]:outline-white">
                 Length
@@ -235,7 +225,13 @@ const Summarizer = ({ input }: { input: string }) => {
         )}
       </div>
       <div className="my-5">
-        <Markdown>{summarizedText}</Markdown>
+        <Markdown>
+          {translatedText
+            ? translatedText
+            : summarizedText
+              ? summarizedText
+              : ""}
+        </Markdown>
       </div>
     </>
   );
