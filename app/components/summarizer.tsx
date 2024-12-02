@@ -70,6 +70,8 @@ const Summarizer = ({ input }: { input: string }) => {
     type = "key-points",
     length = "medium",
   ) => {
+    setSummarizedText(null);
+    setTranslatedText(null);
     const summarizer = await window.ai.summarizer.create({ type, length });
     await summarize(summarizer);
   };
